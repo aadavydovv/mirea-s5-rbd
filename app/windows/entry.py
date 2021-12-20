@@ -11,7 +11,7 @@ from queries.misc import *
 class WindowEntry:
 
     def __init__(self, root, initial_data, table_name, primary_key, field_names, prev_window, prev_root, base_root,
-                 mode=ValuesWindowModes.EDIT):
+                 mode=ValuesWindowModes.EDIT, all_fields=False):
         self.base_root = base_root
         self.prev_root = prev_root
         self.prev_window = prev_window
@@ -24,9 +24,14 @@ class WindowEntry:
         self.transliterated_field_names = initial_data[0]
 
         if mode == ValuesWindowModes.ADD:
-            self.values = self.values[1:]
-            self.field_names = self.field_names[1:]
-            self.transliterated_field_names = self.transliterated_field_names[1:]
+            if not all_fields:
+                self.values = self.values[1:]
+                self.field_names = self.field_names[1:]
+                self.transliterated_field_names = self.transliterated_field_names[1:]
+            else:
+                self.values = self.values
+                self.field_names = self.field_names
+                self.transliterated_field_names = self.transliterated_field_names
 
         self.widget = tk.Toplevel(root, bg=BG)
 

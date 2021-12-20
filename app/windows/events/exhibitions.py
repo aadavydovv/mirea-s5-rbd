@@ -23,16 +23,10 @@ class WindowExhibitions:
         label = make_label('Выставки', frame)
         pack_default(label)
 
-        # table_name_0 = 'Meroprijatie'
-        # table_name_1 = 'Vystavka'
-        # query = f"select * from {table_name_0} " \
-        #         f"inner join {table_name_1} V on {table_name_0}.Nomer_meroprijatija = V.Nomer_meroprijatija"
-        # with MySQLClient() as mysql_client:
-        #     table = mysql_client.query(query, QueryModes.GET, get_original_column_names=True)
-
         table_name = 'Vystavka'
         (fields, entries, original_column_names) = get_table(table_name, get_original_column_names=True)
-        EntryList(frame, fields, entries, table_name, original_column_names, WindowExhibitions, self.widget, root)
+        EntryList(frame, fields, entries, table_name, original_column_names, WindowExhibitions, self.widget, root,
+                  all_fields=True)
 
         pack_default(make_button('Получить период проведения по номеру выставки', self.widget,
                                  lambda event: WindowEnterValue(self.widget, queries.period_by_number,

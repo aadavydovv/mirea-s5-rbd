@@ -20,16 +20,10 @@ class WindowExcursions:
         label = make_label('Экскурсии', frame)
         pack_default(label)
 
-        # table_name_0 = 'Meroprijatie'
-        # table_name_1 = 'Ekskursija'
-        # query = f"select * from {table_name_0} " \
-        #         f"inner join {table_name_1} E on {table_name_0}.Nomer_meroprijatija = E.Nomer_meroprijatija"
-        # with MySQLClient() as mysql_client:
-        #     table = mysql_client.query(query, QueryModes.GET, get_original_column_names=True)
-
         table_name = 'Ekskursija'
         (fields, entries, original_column_names) = get_table(table_name, get_original_column_names=True)
-        EntryList(frame, fields, entries, table_name, original_column_names, WindowExcursions, self.widget, root)
+        EntryList(frame, fields, entries, table_name, original_column_names, WindowExcursions, self.widget, root,
+                  all_fields=True)
 
         pack_default(make_button('Найти по языку', self.widget,
                                  lambda event: WindowEnterValue(self.widget, queries.by_language,

@@ -22,7 +22,8 @@ class WindowAgents:
 
         table_name = 'Kontragent'
         (fields, entries, original_column_names) = get_table(table_name, get_original_column_names=True)
-        EntryList(frame, fields, entries, table_name, original_column_names, WindowAgents, self.widget, root)
+        EntryList(frame, fields, entries, table_name, original_column_names, WindowAgents, self.widget, root,
+                  all_fields=True)
 
         pack_default(make_button('Найти по ИНН', self.widget,
                                  lambda event: WindowEnterValue(self.widget, queries.by_inn,

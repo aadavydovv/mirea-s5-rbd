@@ -12,7 +12,7 @@ from windows.entry import WindowEntry
 class EntryList:
 
     def __init__(self, root, fields: tuple, entries: list, table_name, original_field_names, host_window, prev_root,
-                 base_root, is_result=False):
+                 base_root, is_result=False, all_fields=False):
         self.base_root = base_root
         self.prev_root = prev_root
         self.host_window = host_window
@@ -21,6 +21,7 @@ class EntryList:
         self.table_name = table_name
         self.fields = fields
         self.original_field_names = original_field_names
+        self.all_fields = all_fields
 
         with MySQLClient() as mysql_client:
             self.primary_key = mysql_client.query(primary_key_by_table(table_name), QueryModes.GET_PRIMARY_KEY)
@@ -69,7 +70,7 @@ class EntryList:
             initial_data = (self.fields, [None] * len(self.fields))
             WindowEntry(self.root, initial_data, self.table_name, self.primary_key, self.original_field_names,
                         mode=ValuesWindowModes.ADD, prev_window=self.host_window, prev_root=self.prev_root,
-                        base_root=self.base_root)
+                        base_root=self.base_root, all_fields=self.all_fields)
 
         make_button('Добавить', root, lambda e: open_add_entry_window()).pack(padx=PAD_X, pady=PAD_Y, ipadx=PAD_X,
                                                                               ipady=PAD_Y)

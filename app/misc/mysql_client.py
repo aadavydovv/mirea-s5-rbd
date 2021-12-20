@@ -71,5 +71,7 @@ class MySQLClient:
         transliteration = transliteration.replace('тэ', 'те')
         transliteration = transliteration.replace('тьа', 'та')
         transliteration = transliteration.replace('ишо', 'исхо')
+        transliteration = transliteration.replace('жителства', 'жительства')
+        transliteration = transliteration.replace('подраздэления', 'подразделения')
 
         return transliteration
