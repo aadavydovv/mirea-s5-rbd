@@ -1,9 +1,10 @@
 import tkinter as tk
+
+import queries.items as queries
 from misc.constants import *
 from misc.functions import make_label, make_button, get_table, setup_widget_size, pack_default
 from objects.entry_list import EntryList
 from windows.enter_value import WindowEnterValue
-import queries.items as queries
 
 
 class WindowItems:

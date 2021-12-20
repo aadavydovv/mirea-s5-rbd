@@ -1,9 +1,10 @@
-from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkfont
+from tkinter import ttk
+
 from misc.constants import *
-from queries.misc import *
 from misc.mysql_client import MySQLClient
+from queries.misc import *
 
 
 # создание кнопки
@@ -27,7 +28,8 @@ def make_label(text, master, font_size=18, anchor=tk.CENTER):
 
 def get_table(table_name, get_original_column_names=False):
     with MySQLClient() as mysql_client:
-        table = mysql_client.query(f"{SELECT_ALL_FROM} {table_name}", QueryModes.GET, get_original_column_names=get_original_column_names)
+        table = mysql_client.query(f"{SELECT_ALL_FROM} {table_name}", QueryModes.GET,
+                                   get_original_column_names=get_original_column_names)
     return table
 
 
@@ -35,8 +37,7 @@ def setup_widget_size(widget, wh=True, resizable=False, maxsize=False):
     if not resizable:
         widget.resizable(False, False)
 
-    # don't simplify
-    if wh != True:
+    if wh is not True:
         if isinstance(wh, float):
             width = int(widget.winfo_screenwidth() / wh)
             height = int(widget.winfo_screenheight() / wh)

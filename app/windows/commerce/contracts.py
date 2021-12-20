@@ -1,11 +1,11 @@
 import datetime
 import tkinter as tk
 
+import queries.contracts as queries
 from misc.constants import *
 from misc.functions import make_label, make_button, get_table, setup_widget_size, pack_default
 from objects.entry_list import EntryList
 from windows.enter_value import WindowEnterValue
-import queries.contracts as queries
 from windows.outdated_entries import WindowOutdatedEntries
 
 

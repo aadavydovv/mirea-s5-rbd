@@ -1,11 +1,12 @@
 import tkinter as tk
+
+import queries.events as queries
 from misc.constants import *
 from misc.functions import make_label, make_button, pack_default, pack_button, get_table, setup_widget_size
 from objects.entry_list import EntryList
 from windows.enter_value import WindowEnterValue
 from windows.events.excursions import WindowExcursions
 from windows.events.exhibitions import WindowExhibitions
-import queries.events as queries
 
 
 class WindowEventsHome:

@@ -35,10 +35,3 @@ def by_period(years):
 # артикулы и наименования музейных предметов без года
 def without_year():
     return "select Artikul_muzejnogo_predmeta, Naimenovanie from Muzejnyj_predmet where God is null"
-
-
-# вес, высота, ширина и длина музейного предмета по артикулу
-# = "select Ves_v_grammah, Vysota_v_millimetrah, Shirina_v_millimetrah, Dlina_v_millimetrah from Muzejnyj_predmet where Artikul_muzejnogo_predmeta = 3;"
-
-# высота, ширина и длина каждого музейного предмета в коллекции по номеру N
-# = "select Vysota_v_millimetrah, Shirina_v_millimetrah, Dlina_v_millimetrah from Muzejnyj_predmet where Nomer_kollektsii = 4;"

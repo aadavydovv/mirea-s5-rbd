@@ -3,14 +3,15 @@ from tkinter import ttk
 from tkinter.ttk import Style
 
 from misc.constants import *
-from misc.functions import make_label, setup_widget_size, pack_default, make_button
+from misc.functions import make_label, setup_widget_size, make_button
 from misc.mysql_client import MySQLClient
 from queries.misc import *
 
 
 class WindowEntry:
 
-    def __init__(self, root, initial_data, table_name, primary_key, field_names, prev_window, prev_root, base_root, mode=ValuesWindowModes.EDIT):
+    def __init__(self, root, initial_data, table_name, primary_key, field_names, prev_window, prev_root, base_root,
+                 mode=ValuesWindowModes.EDIT):
         self.base_root = base_root
         self.prev_root = prev_root
         self.prev_window = prev_window
@@ -64,13 +65,15 @@ class WindowEntry:
             entry_frame = ttk.Frame(scrollable_frame, style='My.TFrame')
             entry_frame.grid(column=0, row=n, sticky=tk.W, padx=PAD_X, pady=8)
 
-            make_label(f'{self.transliterated_field_names[n]}', entry_frame, font_size=12).grid(column=0, row=0, sticky=tk.W)
+            make_label(f'{self.transliterated_field_names[n]}', entry_frame, font_size=12).grid(column=0, row=0,
+                                                                                                sticky=tk.W)
 
             entry = ttk.Entry(entry_frame)
             entry.grid(column=0, row=1, sticky=tk.W, pady=8)
 
             if any(self.values):
-                entry.insert(0, self.values[n])
+                formatted_value = self.values[n] if self.values[n] is not None else ''
+                entry.insert(0, formatted_value)
 
             self.entry_widgets.append(entry)
 

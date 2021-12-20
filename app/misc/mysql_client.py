@@ -1,6 +1,7 @@
 from mysql.connector import connect, Error
-from misc.constants import *
 from transliterate import translit
+
+from misc.constants import *
 
 
 class MySQLClient:
@@ -37,7 +38,6 @@ class MySQLClient:
             raise ValueError('invalid query mode')
 
         with self._connection.cursor() as cursor:
-            print(query)
             cursor.execute(query)
 
             match mode:

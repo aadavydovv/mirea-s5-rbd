@@ -18,7 +18,3 @@ def by_standard_price_cap(cap):
 def by_curator_number(number):
     return f"select Nomer_meroprijatija, Naimenovanie " \
            f"from Meroprijatie where Tabelnyj_nomer_sotrudnika_kuratora = {number};"
-
-
-# наименования мероприятий по типу (0 - выставка, 1 - экскурсия)
-# = "select Naimenovanie from Meroprijatie where Tip = 1;"

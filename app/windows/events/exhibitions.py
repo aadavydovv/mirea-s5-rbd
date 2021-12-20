@@ -1,11 +1,11 @@
 import datetime
 import tkinter as tk
+
+import queries.exhibitions as queries
 from misc.constants import *
 from misc.functions import make_label, make_button, setup_widget_size, pack_default, get_table
-from misc.mysql_client import MySQLClient
 from objects.entry_list import EntryList
 from windows.enter_value import WindowEnterValue
-import queries.exhibitions as queries
 from windows.outdated_entries import WindowOutdatedEntries
 
 

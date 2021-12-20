@@ -1,15 +1,11 @@
+import tkinter as tk
 from tkinter import ttk
 
-from misc.functions import make_label, make_button, pack_button, pack_default
-import tkinter as tk
 from misc.constants import *
-from windows.commerce.home import WindowCommerceHome
-from windows.failed_login import WindowFailedLogin
-from windows.fund.home import WindowFundHome
-from windows.events.home import WindowEventsHome
-from windows.home import WindowHome
-from windows.museum.home import WindowMuseum
 from misc.credentials import users
+from misc.functions import make_label, make_button, pack_default
+from windows.failed_login import WindowFailedLogin
+from windows.home import WindowHome
 
 
 class WindowLogin:
@@ -28,7 +24,8 @@ class WindowLogin:
         make_label('Пароль', self.widget, font_size=12).pack(padx=8, pady=4)
         entry_password = ttk.Entry(self.widget, show='*')
         entry_password.pack(padx=8, pady=8)
-        make_button('Войти', self.widget, lambda event: self.check_credentials(entry_login.get(), entry_password.get())).pack(padx=8, pady=16)
+        make_button('Войти', self.widget,
+                    lambda event: self.check_credentials(entry_login.get(), entry_password.get())).pack(padx=8, pady=16)
         self.widget.bind('<Return>', lambda event: self.check_credentials(entry_login.get(), entry_password.get()))
 
     def check_credentials(self, login, password):

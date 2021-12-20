@@ -1,11 +1,12 @@
-from misc.functions import make_label, make_button, pack_button, pack_default
 import tkinter as tk
+
 from misc.constants import *
-from windows.commerce.home import WindowCommerceHome
-from windows.fund.home import WindowFundHome
-from windows.events.home import WindowEventsHome
-from windows.museum.home import WindowMuseum
 from misc.credentials import users
+from misc.functions import make_label, make_button, pack_button, pack_default
+from windows.commerce.home import WindowCommerceHome
+from windows.events.home import WindowEventsHome
+from windows.fund.home import WindowFundHome
+from windows.museum.home import WindowMuseum
 
 
 class WindowHome:
@@ -33,4 +34,3 @@ class WindowHome:
             pack_button(make_button('Мероприятия', self.widget, lambda event: WindowEventsHome(self.widget)))
             pack_button(make_button('Фонд', self.widget, lambda event: WindowFundHome(self.widget)))
             pack_button(make_button('Музей', self.widget, lambda event: WindowMuseum(self.widget)))
-

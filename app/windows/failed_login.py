@@ -1,7 +1,7 @@
 import tkinter as tk
+
 from misc.constants import *
 from misc.functions import make_label, setup_widget_size, pack_default
-from misc.mysql_client import MySQLClient
 
 
 class WindowFailedLogin:

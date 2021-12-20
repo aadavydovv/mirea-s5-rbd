@@ -23,7 +23,3 @@ def by_position(position):
     return "select Tabelnyj_nomer, Serija_i_nomer_pasporta, FIO, Dolzhnost, Zarplata, Data_najma, Data_uvolnenija, " \
            f"Kontaktnyj_nomer_telefona, Kontaktnyj_adres_elektronnoj_pochty " \
            f"from Sotrudnik where Dolzhnost like '%{position}%';"
-
-
-# действующие сотрудники без единого контакта
-# = "select Tabelnyj_nomer, FIO from Sotrudnik where coalesce(Data_uvolnenija, Kontaktnyj_nomer_telefona, Kontaktnyj_adres_elektronnoj_pochty) is null;"

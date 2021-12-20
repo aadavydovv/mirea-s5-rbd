@@ -1,16 +1,18 @@
 import tkinter
-from tkinter import ttk
-from misc.constants import *
-from misc.functions import make_button, pack_button
-from misc.mysql_client import MySQLClient
-from windows.entry import WindowEntry
-from queries.misc import *
 import tkinter as tk
+from tkinter import ttk
+
+from misc.constants import *
+from misc.functions import make_button
+from misc.mysql_client import MySQLClient
+from queries.misc import *
+from windows.entry import WindowEntry
 
 
 class EntryList:
 
-    def __init__(self, root, fields: tuple, entries: list, table_name, original_field_names, host_window, prev_root, base_root, is_result=False):
+    def __init__(self, root, fields: tuple, entries: list, table_name, original_field_names, host_window, prev_root,
+                 base_root, is_result=False):
         self.base_root = base_root
         self.prev_root = prev_root
         self.host_window = host_window
@@ -34,7 +36,7 @@ class EntryList:
             self.tv.heading(field, text=field, anchor=tkinter.W)
 
         for n in range(len(entries)):
-            entries_n = tuple(x if x != None else '(не указано)' for x in entries[n])
+            entries_n = tuple(x if (x is not None) else '(не указано)' for x in entries[n])
             self.tv.insert(parent='', index=n, iid=n, text='', values=entries_n)
 
         self.tv.bind("<Double-1>", self.select)
@@ -56,24 +58,33 @@ class EntryList:
             self.create_button_add(frame_buttons)
             self.create_button_remove(frame_buttons)
 
+    # noinspection PyUnusedLocal
     def select(self, event):
-        WindowEntry(self.root, (self.fields, self.entries[int(self.tv.selection()[0])]), self.table_name, self.primary_key, self.original_field_names, prev_window=self.host_window, prev_root=self.prev_root, base_root=self.base_root)
+        WindowEntry(self.root, (self.fields, self.entries[int(self.tv.selection()[0])]), self.table_name,
+                    self.primary_key, self.original_field_names, prev_window=self.host_window, prev_root=self.prev_root,
+                    base_root=self.base_root)
 
     def create_button_add(self, root):
         def open_add_entry_window():
             initial_data = (self.fields, [None] * len(self.fields))
-            WindowEntry(self.root, initial_data, self.table_name, self.primary_key, self.original_field_names, mode=ValuesWindowModes.ADD, prev_window=self.host_window, prev_root=self.prev_root, base_root=self.base_root)
+            WindowEntry(self.root, initial_data, self.table_name, self.primary_key, self.original_field_names,
+                        mode=ValuesWindowModes.ADD, prev_window=self.host_window, prev_root=self.prev_root,
+                        base_root=self.base_root)
 
-        make_button('Добавить', root, lambda e: open_add_entry_window()).pack(padx=PAD_X, pady=PAD_Y, ipadx=PAD_X, ipady=PAD_Y)
+        make_button('Добавить', root, lambda e: open_add_entry_window()).pack(padx=PAD_X, pady=PAD_Y, ipadx=PAD_X,
+                                                                              ipady=PAD_Y)
 
     def create_button_remove(self, root):
         def remove_entry():
             with MySQLClient() as mysql_client:
-                mysql_client.query(delete_entry_from_table(self.table_name, self.primary_key, self.entries[int(self.tv.selection()[0])][0]), QueryModes.EDIT)
+                mysql_client.query(delete_entry_from_table(self.table_name, self.primary_key,
+                                                           self.entries[int(self.tv.selection()[0])][0]),
+                                   QueryModes.EDIT)
 
             self.update_values()
 
-        make_button('Удалить выбранную запись', root, lambda e: remove_entry()).pack(padx=PAD_X, pady=PAD_Y, ipadx=PAD_X, ipady=PAD_Y)
+        make_button('Удалить выбранную запись', root, lambda e: remove_entry()).pack(padx=PAD_X, pady=PAD_Y,
+                                                                                     ipadx=PAD_X, ipady=PAD_Y)
 
     def update_values(self):
         self.tv.delete(self.tv.selection())

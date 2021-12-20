@@ -1,4 +1,5 @@
 import tkinter as tk
+
 from misc.constants import *
 from misc.functions import make_label, setup_widget_size, pack_default, get_table_name_from_query
 from misc.mysql_client import MySQLClient

@@ -1,4 +1,3 @@
-import datetime
 import decimal
 from decimal import Decimal
 
@@ -19,15 +18,26 @@ def delete_entry_from_table(table, name_of_primary_key, value_of_primary_key):
 
 
 def add_entry_to_table(table, fields, values):
-    fields = str(fields).replace("'", "")
-    values = tuple(format_value_for_db(value) for value in values)
+    print(f'values add: {values}')
 
-    query = f"insert into {table} {fields} values {values}"
+    fields_as_str = str(fields).replace("'", "")
+    query = f"insert into {table} {fields_as_str} values ("
+
+    for n in range(len(fields)):
+        value = format_value_for_db(values[n])
+        query += f'{value}'
+
+        if n < (len(fields) - 1):
+            query += ', '
+        else:
+            query += ')'
+
     print(f'add q: {query}')
     return query
 
 
 def update_entry_in_table(table, fields, values, name_of_primary_key, value_of_primary_key):
+    print(f'values update: {values}')
     query = f"update {table} set "
 
     amount_of_fields = len(fields)
@@ -47,6 +57,9 @@ def update_entry_in_table(table, fields, values, name_of_primary_key, value_of_p
 
 
 def format_value_for_db(value: str):
+    if value == '':
+        return 'NULL'
+
     if value == 'True':
         return True
 
@@ -63,22 +76,11 @@ def format_value_for_db(value: str):
     except decimal.InvalidOperation:
         pass
 
-    value_split = value.split('-')
-    if len(value_split) > 2:
-        if value[-1] == '"':
-            value = value.replace('"', '')
-        if value[-1] != "'":
-            value = f"'{value}'"
-        return value
-        # if value[-1] != "'":
-        #     return f"'{value}'"
-        # else:
-        #     return value
-        # return value.replace("'", '')
+    # value_split = value.split('-')
+    # if len(value_split) > 2:
+    #     if value[-1] == '"':
+    #         value = value.replace('"', '')
+    #     if value[-1] != "'":
+    #         value = f"'{value}'"
 
-    # value = value.replace('"', "'")
-
-    # if "'" not in value:
-    #     value = f"'{value}'"
-
-    return value
+    return f"'{value}'"

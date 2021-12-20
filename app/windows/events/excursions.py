@@ -1,9 +1,10 @@
 import tkinter as tk
+
+import queries.excursions as queries
 from misc.constants import *
 from misc.functions import make_label, make_button, setup_widget_size, pack_default, get_table
 from objects.entry_list import EntryList
 from windows.enter_value import WindowEnterValue
-import queries.excursions as queries
 
 
 class WindowExcursions:

@@ -1,4 +1,5 @@
 import tkinter as tk
+
 from misc.constants import *
 from misc.functions import make_label, make_button, get_table, setup_widget_size, pack_default
 from objects.entry_list import EntryList
